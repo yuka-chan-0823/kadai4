@@ -1,0 +1,33 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+<i><%= flash[:notice] %></i>
+<%= render 'books/share', user:@user, book:@book %>
+<div class="col-md-8 offset-md-1">
+  <h2>Users</h2>
+  <table class="table table-hover table-inverse">
+   <thead>
+     <tr>
+       <th>image</th>
+       <th>name</th>
+       <th colspan="3"></th>
+     </tr>
+   </thead>
+
+   <tbody>
+     <% @users.each do |x| %>
+     <tr>
+        <td>
+        <%= link_to user_path(x.id) do %>
+        <%= image_tag x.get_profile_image(100, 100) %>
+        <% end %>
+        </td>
+       <td><%= x.name %></td>
+       <td><%= link_to 'Show', user_path(x.id) %>
+       </td>
+     </tr>
+     <% end %>
+   </tbody>
+  </table>
+</div>
+</div>
+</div>
