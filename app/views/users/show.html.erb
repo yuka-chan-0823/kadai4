@@ -15,24 +15,39 @@
    </thead>
 
    <tbody>
-     <% @books.each do |x| %>
-     <tr>
-       <td>
-        <%= link_to user_path(x.user.id) do %>
+    <% @books.each do |x| %>
+  <tr>
+    <td>
+      <%= link_to user_path(x.user.id) do %>
         <%= image_tag x.user.get_profile_image(100, 100) %>
-        <% end %>
-       </td> 
-       <td>
-       <%= link_to book_path(x.id) do %>
-           <%= x.title %>
-       <% end %>    
-        </a>   
-        </td>
-       <td><%= x.body %></td>
-     </tr>
-     <% end %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to book_path(x.id) do %>
+        <%= x.title %>
+      <% end %>
+    </td>
+    <td><%= x.body %></td>
+    <td>
+      <% if x.favorited_by?(current_user) %>
+        <p>
+          <%= link_to book_favorites_path(x), method: :delete do %>
+            <i class="fa-solid fa-heart"></i><%= x.favorites.count %> 
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to book_favorites_path(x), method: :post do %>
+            <i class="fa-regular fa-heart"></i><%= x.favorites.count %> 
+          <% end %>
+        </p>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+
    </tbody>
   </table>
 </div>
 </div>
-</di
+</div>
